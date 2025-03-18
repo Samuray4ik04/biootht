@@ -1,37 +1,66 @@
 import { motion } from "framer-motion";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Code2, Sparkles } from "lucide-react";
 
 export default function Header() {
   return (
-    <section className="flex flex-col items-center justify-center min-h-[80vh] text-center">
+    <div className="min-h-screen flex items-center justify-center relative">
+      {/* Floating elements background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/20 rounded-full"
+            animate={{
+              x: [Math.random() * 100, Math.random() * 100],
+              y: [Math.random() * 100, Math.random() * 100],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
+      </div>
+
       <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center relative z-10"
       >
-        <Avatar className="w-32 h-32 mb-8">
-          <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" />
-          <AvatarFallback>JD</AvatarFallback>
-        </Avatar>
+        <motion.div
+          className="inline-block mb-6"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <Code2 className="w-16 h-16 text-primary" />
+        </motion.div>
+
+        <motion.h1
+          className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-primary"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Разработчик
+        </motion.h1>
+
+        <motion.div
+          className="flex items-center justify-center gap-2 text-xl text-slate-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <Sparkles className="w-5 h-5 text-primary" />
+          <span>Создаю современные веб-приложения</span>
+          <Sparkles className="w-5 h-5 text-primary" />
+        </motion.div>
       </motion.div>
-
-      <motion.h1
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
-      >
-        John Doe
-      </motion.h1>
-
-      <motion.p
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="text-xl text-muted-foreground max-w-2xl"
-      >
-        Software Engineer & Creative Developer
-      </motion.p>
-    </section>
+    </div>
   );
 }
