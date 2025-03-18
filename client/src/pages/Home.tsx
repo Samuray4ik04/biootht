@@ -5,11 +5,12 @@ import Bio from "@/components/sections/Bio";
 import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
 import ScrollProgress from "@/components/layout/ScrollProgress";
+import Constellation from "@/components/sections/Constellation";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 relative overflow-hidden">
-      {/* Animated background gradient */}
+      {/* Анимированный фон */}
       <div 
         className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
         style={{
@@ -18,7 +19,10 @@ export default function Home() {
         }}
       />
 
-      {/* Content */}
+      {/* Интерактивное созвездие */}
+      <Constellation />
+
+      {/* Контент */}
       <ScrollProgress />
       <Navigation />
 
